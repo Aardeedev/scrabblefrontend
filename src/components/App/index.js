@@ -6,6 +6,8 @@ import './App.css';
 const API_URL = process.env.REACT_APP_API_URL;
 const API_PORT = process.env.REACT_APP_API_PORT;
 
+console.log(process.env);
+
 function App() {
   const [word, setWord] = useState('');
   const [score, setScore] = useState(null);

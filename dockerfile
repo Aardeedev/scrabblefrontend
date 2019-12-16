@@ -1,15 +1,19 @@
-FROM node:10.16.0-alpine
+FROM node:10.17.0
 
 # Create app directory
-RUN mkdir -p /src/app
-WORKDIR /src/app
+WORKDIR /usr/src/app
 
-RUN npm install -g pushstate-server
+# Expose port for service
+EXPOSE 5000
 
-# Bundle app source
-COPY . /build
+# Install and configure `serve`.
+RUN npm install -g serve
 
-EXPOSE 9000
+# Copy source code to image
+COPY . .
 
-# defined in package.json
-CMD [ "npm", "run", "start:prod" ]    
+# Install dependencies
+RUN npm install
+
+# Build app and start server from script
+CMD ["npm", "run", "start:prod"]
