@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Input from '../Input';
 import Score from '../Score';
+import axios from 'axios';
 import './App.css';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -13,11 +14,10 @@ function App() {
   const [score, setScore] = useState(null);
 
   const handleSubmit = async () => {
-    const response = await fetch(
-      `${API_URL}:${API_PORT}/scrabbleScore/${word}`
+    const response = await axios.get(
+      `${API_URL}:${API_PORT}/scrabblescore/${word}`
     );
-    const data = await response.json();
-    setScore(data.payload.score);
+    setScore(response.data.payload.score);
   };
 
   return (
